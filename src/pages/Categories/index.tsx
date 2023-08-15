@@ -79,7 +79,7 @@ const soon: Game[] = [
   }
 ]
 
-const Categorys = () => (
+const Categories = () => (
   <>
     <ProductsList games={promotions} title="RPG" background="grey" />
     <ProductsList games={soon} title="Ação" background="black" />
@@ -88,4 +88,4 @@ const Categorys = () => (
   </>
 )
 
-export default Categorys
+export default Categories
