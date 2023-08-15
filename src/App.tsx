@@ -1,6 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 
 import Header from './components/Header/Header'
+import Footer from './components/Footer/Footer'
 import GlobalStyles from './styles'
 import RoutesProvider from './pages/routes'
 
@@ -12,6 +13,7 @@ function App() {
         <Header />
       </div>
       <RoutesProvider />
+      <Footer />
     </BrowserRouter>
   )
 }
