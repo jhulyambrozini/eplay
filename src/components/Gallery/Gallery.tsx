@@ -6,31 +6,26 @@ import Zoom from '../../assets/images/zoom.png'
 import Zelda from '../../assets/images/zelda.png'
 import Close from '../../assets/images/fechar.png'
 
-type Galleryitem = {
-  type: 'image' | 'video'
-  url: string
-}
-const mock: Galleryitem[] = [
-  {
-    url: '',
-    type: 'image'
-  },
-  {
-    url: '',
-    type: 'image'
-  },
-  {
-    url: '',
-    type: 'video'
-  }
-]
+import { Galleryitem } from '../../pages/Home'
+import { useState } from 'react'
 
 type Props = {
   defaultCover: string
   name: string
+  items: Galleryitem[]
 }
 
-const Gallery = ({ defaultCover, name }: Props) => {
+interface ModalState extends Galleryitem {
+  isVisible: boolean
+}
+
+const Gallery = ({ defaultCover, name, items }: Props) => {
+  const [modal, setModal] = useState<ModalState>({
+    isVisible: false,
+    type: 'image',
+    url: ''
+  })
+
   const getMediaCover = (item: Galleryitem) => {
     if (item.type === 'image') return item.url
     return defaultCover
@@ -41,12 +36,29 @@ const Gallery = ({ defaultCover, name }: Props) => {
     return Play
   }
 
+  const closeModal = () => {
+    setModal({
+      isVisible: false,
+      type: 'image',
+      url: ''
+    })
+  }
+
   return (
     <>
       <Section title="Galeria" background="black">
         <ListItems>
-          {mock.map((media, index) => (
-            <Item key={media.url}>
+          {items.map((media, index) => (
+            <Item
+              key={media.url}
+              onClick={() =>
+                setModal({
+                  isVisible: true,
+                  type: media.type,
+                  url: media.url
+                })
+              }
+            >
               <img
                 src={getMediaCover(media)}
                 alt={`Mídia ${index + 1} de ${name}`}
@@ -59,26 +71,25 @@ const Gallery = ({ defaultCover, name }: Props) => {
               </Action>
             </Item>
           ))}
-          <Item>
-            <img src={Zelda} alt="Imagem do link" />
-          </Item>
-          <Item>
-            <img src={Zelda} alt="Imagem do link" />
-          </Item>
-          <Item>
-            <img src={Zelda} alt="Imagem do link" />
-          </Item>
         </ListItems>
       </Section>
-      <Modal>
+      <Modal className={modal.isVisible ? 'visible' : ''}>
         <ModalContent className="container">
           <header>
             <h4>{name}</h4>
-            <img src={Close} alt="" />
+            <img
+              src={Close}
+              alt="Clique aqui para fechar modal"
+              onClick={closeModal}
+            />
           </header>
-          <img src="" alt="" />
+          {modal.type === 'image' ? (
+            <img src={modal.url} alt="" />
+          ) : (
+            <iframe src={modal.url} frameBorder={0} />
+          )}
         </ModalContent>
-        <div className="overlay"></div>
+        <div className="overlay" onClick={closeModal}></div>
       </Modal>
     </>
   )

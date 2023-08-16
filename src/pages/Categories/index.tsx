@@ -1,91 +1,48 @@
+import { useEffect, useState } from 'react'
 import ProductsList from '../../components/ProductsList/ProductsList'
-import Game from '../../models/Games'
+import { Game } from '../Home'
 
-const promotions: Game[] = [
-  {
-    id: 0,
-    category: 'aaaaaaa',
-    description: 'bbbbbbbbb',
-    image: '//placehold.it/222x250',
-    infos: ['-34%', 'rs345'],
-    system: 'kkkkkkk',
-    title: 'lkjhbj'
-  },
-  {
-    id: 1,
-    category: 'aaaaaaa',
-    description: 'bbbbbbbbb',
-    image: '//placehold.it/222x250',
-    infos: ['-34%', 'rs345'],
-    system: 'kkkkkkk',
-    title: 'lkjhbj'
-  },
-  {
-    id: 2,
-    category: 'aaaaaaa',
-    description: 'bbbbbbbbb',
-    image: '//placehold.it/222x250',
-    infos: ['-34%', 'rs345'],
-    system: 'kkkkkkk',
-    title: 'lkjhbj'
-  },
-  {
-    id: 3,
-    category: 'aaaaaaa',
-    description: 'bbbbbbbbb',
-    image: '//placehold.it/222x250',
-    infos: ['-34%', 'rs345'],
-    system: 'kkkkkkk',
-    title: 'lkjhbj'
-  }
-]
+const Categories = () => {
+  const [gameAction, setGameAction] = useState<Game[]>([])
+  const [gameSports, setGameSports] = useState<Game[]>([])
+  const [gameSimulation, setGameSimulation] = useState<Game[]>([])
+  const [gameFight, setGameFight] = useState<Game[]>([])
+  const [gameRPG, setGameRPG] = useState<Game[]>([])
 
-const soon: Game[] = [
-  {
-    id: 4,
-    category: 'aaaaaaa',
-    description: 'bbbbbbbbb',
-    image: '//placehold.it/222x250',
-    infos: ['-34%', 'rs345'],
-    system: 'kkkkkkk',
-    title: 'lkjhbj'
-  },
-  {
-    id: 5,
-    category: 'aaaaaaa',
-    description: 'bbbbbbbbb',
-    image: '//placehold.it/222x250',
-    infos: ['-34%', 'rs345'],
-    system: 'kkkkkkk',
-    title: 'lkjhbj'
-  },
-  {
-    id: 6,
-    category: 'aaaaaaa',
-    description: 'bbbbbbbbb',
-    image: '//placehold.it/222x250',
-    infos: ['-34%', 'rs345'],
-    system: 'kkkkkkk',
-    title: 'lkjhbj'
-  },
-  {
-    id: 7,
-    category: 'aaaaaaa',
-    description: 'bbbbbbbbb',
-    image: '//placehold.it/222x250',
-    infos: ['-34%', 'rs345'],
-    system: 'kkkkkkk',
-    title: 'lkjhbj'
-  }
-]
+  useEffect(() => {
+    fetch('https://fake-api-tau.vercel.app/api/eplay/acao')
+      .then((res) => res.json())
+      .then((res) => setGameAction(res))
 
-const Categories = () => (
-  <>
-    <ProductsList games={promotions} title="RPG" background="grey" />
-    <ProductsList games={soon} title="Ação" background="black" />
-    <ProductsList games={promotions} title="Aventura" background="grey" />
-    <ProductsList games={soon} title="RPS" background="black" />
-  </>
-)
+    fetch('https://fake-api-tau.vercel.app/api/eplay/esportes')
+      .then((res) => res.json())
+      .then((res) => setGameSports(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/simulacao')
+      .then((res) => res.json())
+      .then((res) => setGameSimulation(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/luta')
+      .then((res) => res.json())
+      .then((res) => setGameFight(res))
+
+    fetch('https://fake-api-tau.vercel.app/api/eplay/rpg')
+      .then((res) => res.json())
+      .then((res) => setGameRPG(res))
+  }, [])
+  return (
+    <>
+      <ProductsList games={gameAction} title="Ação" background="black" />
+      <ProductsList games={gameSports} title="Esportes" background="grey" />
+      <ProductsList games={gameFight} title="Luta" background="black" />
+      <ProductsList games={gameRPG} title="RPG" background="grey" />
+      <ProductsList
+        games={gameSimulation}
+        title="Simulação"
+        background="black"
+      />
+    </>
+  )
+}
 
 export default Categories

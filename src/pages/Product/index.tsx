@@ -4,30 +4,43 @@ import Section from '../../components/Section/Section'
 import Gallery from '../../components/Gallery/Gallery'
 
 import resident from '../../assets/images/resident.png'
+import { Game } from '../Home'
+import { useEffect, useState } from 'react'
 
 const Product = () => {
   const { id } = useParams()
+  const [game, setGame] = useState<Game>()
+
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/eplay/jogos/${id}`)
+      .then((res) => res.json())
+      .then((res) => setGame(res))
+  }, [id])
+
+  if (!game) {
+    return <h3>Carregando...</h3>
+  }
 
   return (
     <>
-      <Hero />
+      <Hero game={game} />
       <Section title="Sobre o jogo" background="black">
-        <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
-          placeat deserunt at obcaecati reiciendis sint, voluptates vero, alias
-          officiis totam dolorum libero dolorem porro repellendus velit nam, id
-          rem aliquam.
-        </p>
+        <p>{game.description}</p>
       </Section>
       <Section title="Mais detalhes" background="grey">
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis
-          placeat deserunt at obcaecati reiciendis sint, voluptates vero, alias
-          officiis totam dolorum libero dolorem porro repellendus velit nam, id
-          rem aliquam.
+          <b>Plataforma:</b> {game.details.system} <br />
+          <b>Desenvolvedor:</b> {game.details.developer} <br />
+          <b>Editora:</b> {game.details.publisher} <br />
+          <b>Idiomas:</b> O jogo oferece suporte para diversos idiomas,
+          incluindo: {game.details.languages.join(', ')}
         </p>
       </Section>
-      <Gallery defaultCover={resident} name="nome do jogo" />
+      <Gallery
+        defaultCover={game.media.cover}
+        name={game.name}
+        items={game.media.gallery}
+      />
     </>
   )
 }
