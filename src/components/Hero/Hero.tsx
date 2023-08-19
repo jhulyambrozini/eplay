@@ -1,15 +1,17 @@
-import Banner from '../../assets/images/fundo_hogwarts.png'
-import { Game } from '../../pages/Home'
+import { useDispatch } from 'react-redux'
+
 import Button from '../Button/Button'
 import Tag from '../Tag/Tag'
+
 import { BannerHero, Infos } from './styles'
-import { formatPrice } from '../ProductsList/ProductsList'
-import { useDispatch } from 'react-redux'
+
 import { add, open } from '../../store/reducers/cart'
+import { formatPrice } from '../../utils'
 
 type Props = {
   game: Game
 }
+
 const Hero = ({ game }: Props) => {
   const dispatch = useDispatch()
   const addToCart = () => {

@@ -12,15 +12,20 @@ export const Links = styled.ul`
 `
 
 export const HeaderBar = styled.header`
-  background-color: ${colors.grey};
+  background-color: ${colors.gray};
   padding: 24px;
   border-radius: 16px;
   margin-bottom: 80px;
 
-  a {
+  a,
+  span {
     color: ${colors.white};
     font-weight: bold;
     text-decoration: none;
+  }
+
+  h1 {
+    line-height: 0;
   }
 `
 export const HeaderRow = styled.div`
@@ -61,7 +66,7 @@ export const LinkItem = styled.li`
     }
   }
 `
-export const ButtonCart = styled.a`
+export const ButtonCart = styled.span`
   display: flex;
   cursor: pointer;
 

@@ -1,6 +1,6 @@
 import styled from 'styled-components'
-import { breakpoints, colors } from '../../styles'
 import { TagContainer } from '../Tag/styles'
+import { breakpoints, colors } from '../../styles'
 
 export const BannerHero = styled.div`
   position: relative;

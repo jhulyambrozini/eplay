@@ -2,7 +2,7 @@ import { Container, Title } from './styles'
 
 export type Props = {
   title: string
-  background: 'black' | 'grey'
+  background: 'black' | 'gray'
   children: JSX.Element
 }
 

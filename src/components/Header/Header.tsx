@@ -1,20 +1,15 @@
-import {
-  HeaderBar,
-  ButtonCart,
-  LinkItem,
-  Links,
-  Hamburguer,
-  HeaderRow,
-  NavMobile
-} from './styles'
-import Logo from '../../assets/images/logo.svg'
-import Carrinho from '../../assets/images/carrinho.svg'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
+import { useState } from 'react'
+import { HashLink } from 'react-router-hash-link'
+
+import * as Style from './styles'
+
+import logoImage from '../../assets/images/logo.svg'
+import cartIcon from '../../assets/images/carrinho.svg'
 
 import { open } from '../../store/reducers/cart'
 import { RootReducer } from '../../store'
-import { useState } from 'react'
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
@@ -25,50 +20,85 @@ const Header = () => {
     dispatch(open())
   }
   return (
-    <HeaderBar>
-      <HeaderRow>
+    <Style.HeaderBar>
+      <Style.HeaderRow>
         <div>
-          <Hamburguer onClick={() => setIsMenuOpen(!isMenuOpen)}>
+          <Style.Hamburguer onClick={() => setIsMenuOpen(!isMenuOpen)}>
             <span />
             <span />
             <span />
-          </Hamburguer>
+          </Style.Hamburguer>
           <Link to="/">
-            <img src={Logo} alt="EPLAY" />
+            <h1>
+              <img src={logoImage} alt="EPLAY" />
+            </h1>
           </Link>
           <nav>
-            <Links>
-              <LinkItem>
-                <Link to="/categories">Categorias</Link>
-              </LinkItem>
-              <LinkItem>
-                <Link to="/">Novidades</Link>
-              </LinkItem>
-              <LinkItem>
-                <Link to="/">Promoções</Link>
-              </LinkItem>
-            </Links>
+            <Style.Links>
+              <Style.LinkItem>
+                <Link
+                  title="Clique aqui para acessar a página de categorias"
+                  to="/categories"
+                >
+                  Categorias
+                </Link>
+              </Style.LinkItem>
+              <Style.LinkItem>
+                <HashLink
+                  title="Clique aqui para acessar a seção de em breve"
+                  to="/#coming-soon"
+                >
+                  Em breve
+                </HashLink>
+              </Style.LinkItem>
+              <Style.LinkItem>
+                <HashLink
+                  title="Clique aqui para acessar a seção de promoções"
+                  to="/#on-sale"
+                >
+                  Promoções
+                </HashLink>
+              </Style.LinkItem>
+            </Style.Links>
           </nav>
         </div>
-        <ButtonCart onClick={openCart}>
+        <Style.ButtonCart role="button" onClick={openCart}>
           {items.length} <span> - produto(s)</span>{' '}
-          <img src={Carrinho} alt="Carrinho de compras" />
-        </ButtonCart>
-      </HeaderRow>
-      <NavMobile className={isMenuOpen ? 'is-open' : ''}>
-        <Links>
-          <LinkItem>
-            <Link to="/categories">Categorias</Link>
-          </LinkItem>
-          <LinkItem>
-            <Link to="/">Novidades</Link>
-          </LinkItem>
-          <LinkItem>
-            <Link to="/">Promoções</Link>
-          </LinkItem>
-        </Links>
-      </NavMobile>
-    </HeaderBar>
+          <img src={cartIcon} alt="Carrinho de compras" />
+        </Style.ButtonCart>
+      </Style.HeaderRow>
+      <Style.NavMobile className={isMenuOpen ? 'is-open' : ''}>
+        <Style.Links>
+          <Style.LinkItem>
+            <Link
+              title="Clique aqui para acessar a página de categorias"
+              onClick={() => setIsMenuOpen(false)}
+              to="/categories"
+            >
+              Categorias
+            </Link>
+          </Style.LinkItem>
+          <Style.LinkItem>
+            <HashLink
+              onClick={() => setIsMenuOpen(false)}
+              title="Clique aqui para acessar a seção de em breve"
+              to="/#coming-soon"
+            >
+              Em breve
+            </HashLink>
+          </Style.LinkItem>
+          <Style.LinkItem>
+            <HashLink
+              onClick={() => setIsMenuOpen(false)}
+              title="Clique aqui para acessar a seção de promoções"
+              to="/#on-sale"
+            >
+              Promoções
+            </HashLink>
+          </Style.LinkItem>
+        </Style.Links>
+      </Style.NavMobile>
+    </Style.HeaderBar>
   )
 }
 

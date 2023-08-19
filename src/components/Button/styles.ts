@@ -1,8 +1,9 @@
 import styled from 'styled-components'
 import { Link } from 'react-router-dom'
-import { colors } from '../../styles'
 
 import { Props } from './Button'
+
+import { colors } from '../../styles'
 
 export const ButtonContainer = styled.button<Props>`
   background-color: ${(props) =>

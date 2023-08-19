@@ -1,13 +1,12 @@
-import Section from '../Section/Section'
-import { Action, Item, ListItems, Modal, ModalContent } from './styles'
-
-import Play from '../../assets/images/play.png'
-import Zoom from '../../assets/images/zoom.png'
-import Zelda from '../../assets/images/zelda.png'
-import Close from '../../assets/images/fechar.png'
-
-import { Galleryitem } from '../../pages/Home'
 import { useState } from 'react'
+
+import Section from '../Section/Section'
+
+import * as Style from './styles'
+
+import playIcon from '../../assets/images/play.png'
+import zoomIcon from '../../assets/images/zoom.png'
+import closeIcon from '../../assets/images/fechar.png'
 
 type Props = {
   defaultCover: string
@@ -32,8 +31,8 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
   }
 
   const getMediaIcon = (item: Galleryitem) => {
-    if (item.type === 'image') return Zoom
-    return Play
+    if (item.type === 'image') return zoomIcon
+    return playIcon
   }
 
   const closeModal = () => {
@@ -47,9 +46,9 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
   return (
     <>
       <Section title="Galeria" background="black">
-        <ListItems>
+        <Style.ListItems>
           {items.map((media, index) => (
-            <Item
+            <Style.Item
               key={media.url}
               onClick={() =>
                 setModal({
@@ -63,22 +62,22 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
                 src={getMediaCover(media)}
                 alt={`Mídia ${index + 1} de ${name}`}
               />
-              <Action>
+              <Style.Action>
                 <img
                   src={getMediaIcon(media)}
                   alt="Toque para maximar a mídia"
                 />
-              </Action>
-            </Item>
+              </Style.Action>
+            </Style.Item>
           ))}
-        </ListItems>
+        </Style.ListItems>
       </Section>
-      <Modal className={modal.isVisible ? 'visible' : ''}>
-        <ModalContent className="container">
+      <Style.Modal className={modal.isVisible ? 'is-visible' : ''}>
+        <Style.ModalContent className="container">
           <header>
             <h4>{name}</h4>
             <img
-              src={Close}
+              src={closeIcon}
               alt="Clique aqui para fechar modal"
               onClick={closeModal}
             />
@@ -88,9 +87,9 @@ const Gallery = ({ defaultCover, name, items }: Props) => {
           ) : (
             <iframe src={modal.url} frameBorder={0} />
           )}
-        </ModalContent>
+        </Style.ModalContent>
         <div className="overlay" onClick={closeModal}></div>
-      </Modal>
+      </Style.Modal>
     </>
   )
 }

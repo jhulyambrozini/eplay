@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+
 import { colors } from '../../styles'
 
 export const ListItems = styled.ul`
@@ -22,6 +23,7 @@ export const Action = styled.div`
 
 export const Item = styled.li`
   position: relative;
+  cursor: zoom-in;
 
   > img {
     border: 2px solid ${colors.white};
@@ -49,7 +51,7 @@ export const Modal = styled.div`
   align-items: center;
   justify-content: center;
 
-  &.visible {
+  &.is-visible {
     display: flex;
   }
 
@@ -80,6 +82,8 @@ export const ModalContent = styled.div`
 
     img {
       cursor: pointer;
+      height: 16px;
+      width: 16px;
     }
   }
   > img {
