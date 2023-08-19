@@ -10,7 +10,7 @@ type RowProps = {
 }
 
 type TabButtonProps = {
-  isactive: boolean
+  isActive: boolean
 }
 
 export const Row = styled.div<RowProps>`
@@ -46,7 +46,7 @@ export const InputGroup = styled.div<InputGroupProps>`
   }
 
   @media (max-width: ${breakpoints.tablet}) {
-    marin-top: 16px;
+    margin-top: 16px;
   }
 `
 export const TabButton = styled.button<TabButtonProps>`
@@ -55,7 +55,7 @@ export const TabButton = styled.button<TabButtonProps>`
   font-weight: bold;
   color: ${colors.white};
   background-color: ${(props) =>
-    props.isactive ? colors.green : colors.black};
+    props.isActive ? colors.green : colors.black};
   height: 32px;
   border: none;
   cursor: pointer;
@@ -67,7 +67,7 @@ export const TabButton = styled.button<TabButtonProps>`
   }
 
   @media (max-width: ${breakpoints.tablet}) {
-    marin-top: 8px;
+    margin-top: 8px;
     width: 100%;
   }
 `

@@ -82,13 +82,13 @@ const api = createApi({
 
 export const {
   useGetFeaturedGameQuery,
-  useGetOnSaleQuery,
   useGetSoonQuery,
+  useGetOnSaleQuery,
   useGetActionGamesQuery,
+  useGetSportGamesQuery,
+  useGetSimulationGamesQuery,
   useGetFightGamesQuery,
   useGetRpgGamesQuery,
-  useGetSimulationGamesQuery,
-  useGetSportGamesQuery,
   useGetGameQuery,
   usePurchaseMutation
 } = api
